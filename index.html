@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surah Counter</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #2e8b57;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .item-counter {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #2e8b57;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3cb371;
+        }
+
+        .progress {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        #progressBar {
+            background-color: #2e8b57;
+            height: 10px;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .counter {
+                font-size: 2rem;
+            }
+
+            .item-counter {
+                font-size: 1rem;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Surah Counter</h1>
+        <p>Complete 41 phases daily for 41 days.</p>
+        <div class="counter">
+            <span id="phaseCount">0</span>/41 Phases
+        </div>
+        <div class="item-counter">
+            <p>Current Phase:</p>
+            <p>Surah Al-Fatiha: <span id="fatihaCount">0</span>/1</p>
+            <p>Surah Al-Ikhlas: <span id="ikhlasCount">0</span>/3</p>
+        </div>
+        <button id="incrementBtn">Complete Item</button>
+        <button id="resetBtn">Reset Counter</button>
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
+        <p>Day <span id="dayCount">1</span>/41</p>
+    </div>
+
+    <script>
+        let phaseCount = 0;
+        let dayCount = 1;
+        let fatihaCount = 0;
+        let ikhlasCount = 0;
+
+        const phaseCountElement = document.getElementById('phaseCount');
+        const fatihaCountElement = document.getElementById('fatihaCount');
+        const ikhlasCountElement = document.getElementById('ikhlasCount');
+        const dayCountElement = document.getElementById('dayCount');
+        const progressBar = document.getElementById('progressBar');
+        const incrementBtn = document.getElementById('incrementBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // Load saved progress from localStorage
+        if (localStorage.getItem('phaseCount')) {
+            phaseCount = parseInt(localStorage.getItem('phaseCount'));
+            dayCount = parseInt(localStorage.getItem('dayCount'));
+            fatihaCount = parseInt(localStorage.getItem('fatihaCount'));
+            ikhlasCount = parseInt(localStorage.getItem('ikhlasCount'));
+            updateDisplay();
+        }
+
+        incrementBtn.addEventListener('click', () => {
+            if (fatihaCount < 1) {
+                fatihaCount++;
+            } else if (ikhlasCount < 3) {
+                ikhlasCount++;
+            }
+
+            if (fatihaCount === 1 && ikhlasCount === 3) {
+                phaseCount++;
+                fatihaCount = 0;
+                ikhlasCount = 0;
+            }
+
+            if (phaseCount === 41) {
+                alert('Congratulations! You have completed 41 phases today.');
+            }
+
+            updateDisplay();
+            saveProgress();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            phaseCount = 0;
+            fatihaCount = 0;
+            ikhlasCount = 0;
+            updateDisplay();
+            saveProgress();
+        });
+
+        function updateDisplay() {
+            phaseCountElement.textContent = phaseCount;
+            fatihaCountElement.textContent = fatihaCount;
+            ikhlasCountElement.textContent = ikhlasCount;
+            dayCountElement.textContent = dayCount;
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progress = (phaseCount / 41) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function saveProgress() {
+            localStorage.setItem('phaseCount', phaseCount);
+            localStorage.setItem('dayCount', dayCount);
+            localStorage.setItem('fatihaCount', fatihaCount);
+            localStorage.setItem('ikhlasCount', ikhlasCount);
+        }
+    </script>
+</body>
+
+</html>
