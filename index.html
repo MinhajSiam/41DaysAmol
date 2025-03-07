@@ -46,6 +46,19 @@
             margin: 10px 0;
         }
 
+        .dates {
+            font-size: 0.9rem;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            /* Small gap between buttons */
+            margin: 20px 0;
+        }
+
         button {
             background-color: #2e8b57;
             color: #fff;
@@ -54,8 +67,9 @@
             font-size: 1rem;
             border-radius: 5px;
             cursor: pointer;
-            margin: 5px;
             transition: background-color 0.3s ease;
+            flex: 1;
+            /* Equal width for both buttons */
         }
 
         button:hover {
@@ -111,18 +125,18 @@
             <p>Surah Al-Fatiha: <span id="fatihaCount">0</span>/1</p>
             <p>Surah Al-Ikhlas: <span id="ikhlasCount">0</span>/3</p>
         </div>
-        <button id="incrementBtn">Complete Item</button>
-        <button id="resetBtn">Reset Counter</button>
+        <div class="buttons">
+            <button id="resetBtn">Reset Counter</button>
+            <button id="incrementBtn">Complete Item</button>
+        </div>
         <div class="progress">
             <div id="progressBar"></div>
         </div>
         <p>Day <span id="dayCount">1</span>/41</p>
-        <!-- <p><i class="fa-solid fa-circle" style="color: #33ff41;"></i> Start Day: <span id="dayCount">03</span>.03.2025</p> -->
-        <!-- <p><i class="fa-solid fa-circle" style="color: #33ff41;"></i> Start Day: 03.03.2025</p> -->
-        <p style="margin-top: -70px;"><span style="color: #33ff41; font-size: 100px;">.</span> 01<sup>st</sup> Day:
-            03.03.2025</p>
-        <p style="margin-top: -90px;"><span style="color: #33ff41; font-size: 100px;">.</span> 41<sup>th</sup> Day:
-            12.04.2025</p>
+        <div class="dates">
+            <p>1st day: 03.03.2025</p>
+            <p>41th day: 12.04.2025</p>
+        </div>
     </div>
 
     <script>
@@ -197,7 +211,6 @@
             localStorage.setItem('ikhlasCount', ikhlasCount);
         }
     </script>
-    <script src="https://kit.fontawesome.com/54a16c130a.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
