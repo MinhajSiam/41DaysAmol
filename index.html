@@ -29,6 +29,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, color 0.3s ease;
+            position: relative;
         }
 
         body.dark-mode .container {
@@ -110,12 +111,14 @@
             transition: width 0.3s ease;
         }
 
+        /* Toggle Switch Styles */
         .toggle-switch {
-            position: relative;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             display: inline-block;
-            width: 60px;
-            height: 34px;
-            margin-bottom: 20px;
+            width: 40px; /* Smaller width */
+            height: 24px; /* Smaller height */
         }
 
         .toggle-switch input {
@@ -133,16 +136,16 @@
             bottom: 0;
             background-color: #ccc;
             transition: 0.4s;
-            border-radius: 34px;
+            border-radius: 24px; /* Adjusted for smaller size */
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
+            height: 18px; /* Smaller circle */
+            width: 18px; /* Smaller circle */
+            left: 3px; /* Adjusted position */
+            bottom: 3px; /* Adjusted position */
             background-color: white;
             transition: 0.4s;
             border-radius: 50%;
@@ -153,7 +156,7 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(26px);
+            transform: translateX(16px); /* Adjusted for smaller size */
         }
 
         @media (max-width: 600px) {
@@ -179,11 +182,12 @@
 
 <body>
     <div class="container">
-        <h1>Surah Counter</h1>
+        <!-- Toggle Switch in Top-Right Corner -->
         <label class="toggle-switch">
             <input type="checkbox" id="darkModeToggle">
             <span class="slider"></span>
         </label>
+        <h1>Surah Counter</h1>
         <p>Complete 41 phases daily for 41 days.</p>
         <div class="counter">
             <span id="phaseCount">0</span>/41 Phases
